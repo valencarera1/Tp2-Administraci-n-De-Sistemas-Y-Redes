@@ -135,7 +135,7 @@ El servidor está configurado con las siguientes características de seguridad:
     ```
     Ctrl + 0: Guardar
     Enter: Aceptar la ubicación del archivo, despues de fijarse que este bien
-    Ctrl + X
+    Ctrl + X: Salir de nano y volver a la terminal
     ```
 
 5. Ajustar permisos de las claves

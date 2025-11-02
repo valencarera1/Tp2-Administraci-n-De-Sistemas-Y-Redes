@@ -91,8 +91,42 @@
     8. Con WireGuard creamos el túnel y se activa la conexión automáticamente.
     - Aclarción: Para comprobar si anda, vemos que realizó el handshake y que el cliente está recibiendo y enviando datos al servidor.
     
-### 3. Configuramos el Firewall: sudo ufw allow from 192.168.0.0/24 && sudo ufw reload
+### 3. Configuramos el Firewall
+- AAAA
+    1. Ver estado actual:
+    ```
+    sudo ufw status verbose
+    ```
+    
+    2. Reseteamos reglas anteriores:
+    ```
+    sudo ufw reset
+    ```
 
-Anda a saber qué hace esto: sudo ss -upln | grep 51820
+    3. Bloqueamos todo lo entrante y permitimos lo saliente:
+    ```
+    sudo ufw default deny incoming
+    sudo ufw default allow outgoing
+    ```
 
+    4. Permitimos SSH:
+    ```
+    sudo ufw allow 22/tcp
+    ```
+    - Aclaración: Antes de esta paso verificamos en que puerto nuestro SSH estaba: ``sudo nano /etc/ssh/sshd_config``
+    5. Permitir el puerto de WireGuard (51820/UDP)
+    ```
+    sudo ufw allow 51820/udp
+    ```
+    6. Este paso no es completamente necesario pero permitimos el tráfico interno del túnel VPN:
+        - WireGuard usa una red interna (por ejemplo 10.8.0.0/24). Para permitir tráfico desde esa red:
+    ```
+    sudo ufw allow in on wg0
+    sudo ufw allow out on wg0
+    ```
+
+    7. Por ultimo activamos el firewall:
+    ```
+    sudo ufw enable
+    ```
 

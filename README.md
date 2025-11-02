@@ -59,9 +59,9 @@ El servidor está configurado con las siguientes características de seguridad:
     4. systemctl enable ssh
     5. systemctl start ssh
     ```
-    systemctl status ssh: Verifica si SSH está instalado y corriendo
-    systemctl enable ssh: Configura SSH para iniciarse automáticamente al bootear
-    systemctl start ssh: Inicia el servicio inmediatamente
+    - **systemctl status ssh**: Verifica si SSH está instalado y corriendo
+    - **systemctl enable ssh**: Configura SSH para iniciarse automáticamente al bootear
+    - **systemctl start ssh**: Inicia el servicio inmediatamente
 
 2. Verificación del puerto SSH
     ```
@@ -85,9 +85,9 @@ El servidor está configurado con las siguientes características de seguridad:
     cat server_private.key | wg pubkey | tee server_public.key
     ```
 
-    wg genkey: Genera una clave privada
-    tee: Guarda la salida en archivo y la muestra en pantalla
-    wg pubkey: Deriva la clave pública desde la privada
+    - **wg genkey**: Genera una clave privada
+    - **tee**: Guarda la salida en archivo y la muestra en pantalla
+    - **wg pubkey**: Deriva la clave pública desde la privada
 
     Las claves privadas nunca las compartimos, solo intercambiamos claves públicas entre servidor y cliente.
 

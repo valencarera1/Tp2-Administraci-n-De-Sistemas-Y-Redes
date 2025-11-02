@@ -270,7 +270,7 @@ El servidor está configurado con las siguientes características de seguridad:
     </IfModule>
     ```
 
-    - **UserDir enabled ***: Habilita userdir para todos los usuarios
+    - UserDir enabled **: Habilita userdir para todos los usuarios
     - **AllowOverride All**: Permite archivos .htaccess (necesario para autenticación)
     - **Options Indexes**: Muestra listado de archivos si no hay index.html
     - **Require all granted**: Permite acceso (la autenticación se maneja con .htaccess)
@@ -371,7 +371,7 @@ El servidor está configurado con las siguientes características de seguridad:
     ```
     htpasswd -c /home/valen/.htpasswd valen
     ```
-    -c: Crea un nuevo archivo
+    - **-c**: Crea un nuevo archivo
     Solicitará ingresar y confirmar la contraseña
     La contraseña se almacena hasheada
 

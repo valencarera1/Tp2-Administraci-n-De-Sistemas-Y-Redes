@@ -166,98 +166,88 @@ siguientes comandos:
     sudo chmod 755 /home/*/public_html
     ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-• Reiniciar Apache:
-sudo systemctl restart apache2
-• Crear una página de inicio con enlaces a los usuarios:
+6. Reiniciar Apache:
+    ```
+    sudo systemctl restart apache2
+    ```
+<!-- • Crear una página de inicio con enlaces a los usuarios:
 <ul>
 <li><a href="/~user/">user</a></li>
-</ul>
+</ul> -->
+
+7. Modificamos el archivo: ``sudo nano /var/www/html/index.html``
+    ```
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <title>Usuarios del servidor</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+        text-align: center;
+        padding: 40px;
+        }
+        ul {
+        list-style: none;
+        padding: 0;
+        }
+        li {
+        margin: 10px 0;
+        }
+        a {
+        text-decoration: none;
+        color: #0077cc;
+        font-weight: bold;
+        }
+    </style>
+    </head>
+    <body>
+    <h1>Bienvenido al servidor Apache</h1>
+    <p>Seleccioná un usuario para ver su sitio:</p>
+    <ul>
+        <li><a href="/~valen/">valen</a></li>
+    </ul>
+    </body>
+    </html>
+    ```
+    - Aclaración: Este archivo es la pagina principal de Apache y la modificamos para que salga lo que nosotras queremos y no la pagina default de Apache2
+
+    8. Abrimos http://<IP servidor>/~valen/ desde el cliente y vemos que salio nuestra pagina.
+    *ADJUNTAR IMAGEN*
 
 
+### 3. Configuramos la autenticacion de los usuarios:
+1. Abrimos la carpeta del usuario:
+    ```
+    cd /home/valen/public_html
+    nano .htaccess
+    ```
+2. Ahi dentro configuramos que el usuario tenga que autenticarse:
+    ```
+    AuthType Basic
+    AuthName "Acceso restringido"
+    AuthUserFile /home/valen/.htpasswd
+    Require valid-user
+    ```
+3. Creamos el archivo de contraseñas:
+    ```
+    sudo htpasswd -c /home/valen/.htpasswd valen
+    ```
+    - Aclaración: Luego de este paso nos pidio ingresar una contraseña para el usuario y la almacenó.
+    
+4. Una vez hecho esto reiniciamos apache: 
+5. Finalemente verificamos que anda:
+    ```
+    1. Entramos a *http......*
+    2. Ingresamos a valen
+    3. Nos va a pedir la contraseña y la ingresamos
+    4. A
+    ```
 
-sudo nano /var/www/html/index.html
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Usuarios del servidor</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      text-align: center;
-      padding: 40px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin: 10px 0;
-    }
-    a {
-      text-decoration: none;
-      color: #0077cc;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <h1>Bienvenido al servidor Apache</h1>
-  <p>Seleccioná un usuario para ver su sitio:</p>
-  <ul>
-    <li><a href="/~valen/">valen</a></li>
-  </ul>
-</body>
-</html>
-
-http://<IP servidor>/~valen/,
- le aparezca una ventanita de login en el navegador (usuario + contraseña).
-🪄 Pasos generales:
-En la carpeta del usuario:
-
-cd /home/valen/public_html
-nano .htaccess
-Escribí esto dentro:
- AuthType Basic
-AuthName "Acceso restringido"
-AuthUserFile /home/valen/.htpasswd
-Require valid-user
-Creá el archivo de contraseñas:
- sudo htpasswd -c /home/valen/.htpasswd valen
- (te pedirá la contraseña del usuario valen)
-Asegurate de que Apache permita usar .htaccess (ya lo hiciste con AllowOverride All).
-🧩 Con eso, Apache pedirá autenticación antes de acceder al contenido.
-✅ Cumple con:
-“Autenticación con usuario/password”
-“Acceso a los servicios solo desde la VPN”
-“Acceso a ~usuario vía HTTP”
+<!-- 
 
 
 sudo nano /usr/local/bin/generar_home.sh
@@ -299,7 +289,7 @@ sudo chmod +x /usr/local/bin/generar_home.sh
 </body>
 </html>
 
-
+ -->
 
 
 

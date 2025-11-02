@@ -286,28 +286,13 @@ El servidor está configurado con las siguientes características de seguridad:
 7. Reiniciar Apache
     ```
     systemctl restart apache2
+    ```    
+
+8. Modificamos el archivo principal:
+    ```
+    nano /var/www/html/index.html
     ```
 
-8. Creamos los usuarios como ejemplo:
-    ```
-    adduser valenlu
-    ```
-
-    Luego, creamos los directorios public_html para cada usuario:
-    ```
-    sudo -u valenlu mkdir -p /home/valenlu/public_html
-    sudo -u valenlu chmod 755 /home/valenlu/public_html
-    sudo chmod 755 /home/valenlu
-    ```
-
-    Por último modificamos el archivo: `nano /home/valenlu/public_html/index.html` para cada usuario:
-    ```
-        
-    ```
-
-    
-
-9. Modificamos el archivo: ``nano /var/www/html/index.html``
     ```
     <!DOCTYPE html>
     <html lang="es">
@@ -345,9 +330,8 @@ El servidor está configurado con las siguientes características de seguridad:
     </html>
     ```
     - Aclaración: Este archivo es la pagina principal de Apache y la modificamos para que salga lo que nosotras queremos y no la pagina default de Apache2
-
-    8. Abrimos http://<IP servidor>/~valen/ desde el cliente y vemos que salio nuestra pagina.
-    *ADJUNTAR IMAGEN*
+    
+    Esta es la página principal que se muestra al acceder a http://10.0.0.1/ desde la VPN.
 
 
 ## Configuramos la autenticacion de los usuarios
@@ -466,3 +450,26 @@ El servidor está configurado con las siguientes características de seguridad:
     - 0 3 * * *: Todos los días a las 3:00 AM
     - **>> /var/log/backup_users.log**: Guarda la salida en un log
     - **2>&1**: Redirige errores también al log
+
+## Creación de Usuarios Extras
+1. Crear usuario y su directorio
+    ```
+    adduser lucia
+    mkdir -p /home/lucia/public_html
+    chown -R lucia:lucia /home/lucia/public_html
+    chmod 755 /home/lucia/public_html
+    ```
+
+2. Configurar autenticación
+    ```
+    nano /home/lucia/public_html/.htaccess
+    ```
+    ```
+    AuthType Basic
+    AuthName "Área restringida - Identificate"
+    AuthUserFile /home/lucia/.htpasswd
+    Require valid-user
+    Crear contraseña:
+    bashhtpasswd -c /home/lucia/.htpasswd lucia
+    chmod 644 /home/lucia/.htpasswd
+    ```
